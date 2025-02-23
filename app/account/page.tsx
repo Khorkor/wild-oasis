@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 const Account = () => {
   return (
     <div className="mb-7 text-2xl font-semibold text-accent-400">
-      Welcome, Khor Accont page
+      Welcome, Khor
     </div>
   );
 };
