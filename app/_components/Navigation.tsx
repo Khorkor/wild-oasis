@@ -3,16 +3,11 @@ import Link from "next/link";
 const Navigation = () => {
   return (
     <nav className="z-10 text-xl">
-      <ul className="flex gap-16 items-center">
-        <li>
-          <Link href="/" className="hover:text-accent-400 transition-colors">
-            Home
-          </Link>
-        </li>
+      <ul className="flex items-center gap-16">
         <li>
           <Link
             href="/cabins"
-            className="hover:text-accent-400 transition-colors"
+            className="transition-colors hover:text-accent-400"
           >
             Cabins
           </Link>
@@ -20,7 +15,7 @@ const Navigation = () => {
         <li>
           <Link
             href="/about"
-            className="hover:text-accent-400 transition-colors"
+            className="transition-colors hover:text-accent-400"
           >
             About
           </Link>
@@ -28,7 +23,7 @@ const Navigation = () => {
         <li>
           <Link
             href="/account"
-            className="hover:text-accent-400 transition-colors"
+            className="transition-colors hover:text-accent-400"
           >
             Guest area
           </Link>
