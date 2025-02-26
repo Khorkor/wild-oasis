@@ -1,7 +1,10 @@
-import { UsersIcon } from "@heroicons/react/24/solid";
-import { FC } from "react";
-import { Cabin } from "../_types/Cabin";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { FC } from 'react';
+
+import { UsersIcon } from '@heroicons/react/24/solid';
+
+import { Cabin } from '../_types/Cabin';
 
 interface CabinCardProps {
   cabin: Cabin;
@@ -12,12 +15,14 @@ const CabinCard: FC<CabinCardProps> = ({ cabin }) => {
 
   return (
     <div className="flex border border-primary-800">
-      <Image
-        src={image || "/placeholder.jpg"}
-        alt={`Cabin ${name}`}
-        className="flex-1 border-r border-primary-800 object-cover"
-      />
-
+      <div className="relative flex-1">
+        <Image
+          src={image || "/placeholder.jpg"}
+          fill
+          alt={`Cabin ${name}`}
+          className="border-r border-primary-800 object-cover"
+        />
+      </div>
       <div className="flex-grow">
         <div className="bg-primary-950 px-7 pb-4 pt-5">
           <h3 className="mb-3 text-2xl font-semibold text-accent-500">
@@ -49,12 +54,12 @@ const CabinCard: FC<CabinCardProps> = ({ cabin }) => {
         </div>
 
         <div className="border-t border-t-primary-800 bg-primary-950 text-right">
-          <a
+          <Link
             href={`/cabins/${id}`}
             className="inline-block border-l border-primary-800 px-6 py-4 transition-all hover:bg-accent-600 hover:text-primary-900"
           >
             Details & reservation &rarr;
-          </a>
+          </Link>
         </div>
       </div>
     </div>

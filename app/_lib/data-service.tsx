@@ -1,13 +1,14 @@
-import { eachDayOfInterval } from 'date-fns';
+import { eachDayOfInterval } from "date-fns";
+import { notFound } from "next/navigation";
 
-import { Booking, Cabin, Country, Guest, Settings } from '@/app/_types';
+import { Booking, Cabin, Country, Guest, Settings } from "@/app/_types";
 
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 
 /////////////
 // GET
 
-export async function getCabin(id: number): Promise<Cabin | null> {
+export const getCabin = async (id: number): Promise<Cabin | null> => {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -15,15 +16,15 @@ export async function getCabin(id: number): Promise<Cabin | null> {
     .single();
 
   if (error) {
-    console.error(error);
+    notFound();
   }
 
   return data;
-}
+};
 
-export async function getCabinPrice(
+export const getCabinPrice = async (
   id: number,
-): Promise<{ regularPrice: number; discount: number } | null> {
+): Promise<{ regularPrice: number; discount: number } | null> => {
   const { data, error } = await supabase
     .from("cabins")
     .select("regularPrice, discount")
@@ -35,7 +36,7 @@ export async function getCabinPrice(
   }
 
   return data;
-}
+};
 
 export const getCabins = async (): Promise<Cabin[]> => {
   const { data, error } = await supabase
@@ -44,14 +45,13 @@ export const getCabins = async (): Promise<Cabin[]> => {
     .order("name");
 
   if (error) {
-    console.error(error);
     throw new Error("Cabins could not be loaded");
   }
 
   return data;
 };
 
-export async function getGuest(email: string): Promise<Guest | null> {
+export const getGuest = async (email: string): Promise<Guest | null> => {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -63,9 +63,9 @@ export async function getGuest(email: string): Promise<Guest | null> {
   }
 
   return data;
-}
+};
 
-export async function getBooking(id: number): Promise<Booking | null> {
+export const getBooking = async (id: number): Promise<Booking | null> => {
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
@@ -78,9 +78,9 @@ export async function getBooking(id: number): Promise<Booking | null> {
   }
 
   return data;
-}
+};
 
-export async function getBookings(guestId: number): Promise<Booking[]> {
+export const getBookings = async (guestId: number): Promise<Booking[]> => {
   const { data, error } = await supabase
     .from("bookings")
     .select(
@@ -95,7 +95,7 @@ export async function getBookings(guestId: number): Promise<Booking[]> {
   }
 
   return data;
-}
+};
 
 // export async function getBookedDatesByCabinId(
 //   cabinId: number,
@@ -127,9 +127,9 @@ export async function getBookings(guestId: number): Promise<Booking[]> {
 //   return bookedDates;
 // }
 
-export async function getBookedDatesByCabinId(
+export const getBookedDatesByCabinId = async (
   cabinId: number,
-): Promise<Date[]> {
+): Promise<Date[]> => {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0); // Ensure time is set to midnight (UTC)
 
@@ -158,9 +158,9 @@ export async function getBookedDatesByCabinId(
     .flat();
 
   return bookedDates;
-}
+};
 
-export async function getSettings(): Promise<Settings> {
+export const getSettings = async (): Promise<Settings> => {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {
@@ -169,9 +169,9 @@ export async function getSettings(): Promise<Settings> {
   }
 
   return data;
-}
+};
 
-export async function getCountries(): Promise<Country[]> {
+export const getCountries = async (): Promise<Country[]> => {
   try {
     const res = await fetch(
       "https://restcountries.com/v2/all?fields=name,flag",
@@ -182,12 +182,12 @@ export async function getCountries(): Promise<Country[]> {
     console.error(error);
     throw new Error("Could not fetch countries");
   }
-}
+};
 
 /////////////
 // CREATE
 
-export async function createGuest(newGuest: Guest): Promise<Guest[]> {
+export const createGuest = async (newGuest: Guest): Promise<Guest[]> => {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
@@ -200,9 +200,9 @@ export async function createGuest(newGuest: Guest): Promise<Guest[]> {
   }
 
   return data as Guest[];
-}
+};
 
-export async function createBooking(newBooking: Booking): Promise<Booking> {
+export const createBooking = async (newBooking: Booking): Promise<Booking> => {
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
@@ -215,15 +215,15 @@ export async function createBooking(newBooking: Booking): Promise<Booking> {
   }
 
   return data;
-}
+};
 
 /////////////
 // UPDATE
 
-export async function updateGuest(
+export const updateGuest = async (
   id: number,
   updatedFields: Partial<Guest>,
-): Promise<Guest> {
+): Promise<Guest> => {
   const { data, error } = await supabase
     .from("guests")
     .update(updatedFields)
@@ -236,12 +236,12 @@ export async function updateGuest(
     throw new Error("Guest could not be updated");
   }
   return data;
-}
+};
 
-export async function updateBooking(
+export const updateBooking = async (
   id: number,
   updatedFields: Partial<Booking>,
-): Promise<Booking> {
+): Promise<Booking> => {
   const { data, error } = await supabase
     .from("bookings")
     .update(updatedFields)
@@ -254,16 +254,16 @@ export async function updateBooking(
     throw new Error("Booking could not be updated");
   }
   return data;
-}
+};
 
 /////////////
 // DELETE
 
-export async function deleteBooking(id: number): Promise<void> {
+export const deleteBooking = async (id: number): Promise<void> => {
   const { error } = await supabase.from("bookings").delete().eq("id", id);
 
   if (error) {
     console.error(error);
     throw new Error("Booking could not be deleted");
   }
-}
+};
