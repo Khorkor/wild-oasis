@@ -1,10 +1,10 @@
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "@/app/_lib/data-service";
 
-import { Cabin } from "../_types/Cabin";
+import { ICabin } from "../_types/Cabin";
 
 async function CabinList() {
-  const cabins: Cabin[] = await getCabins();
+  const cabins: ICabin[] = await getCabins();
 
   if (!cabins.length) return null;
 

@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import Image from "next/image";
+import { FC } from "react";
 
 const SignInButton: FC = () => {
   return (
     <button className="flex items-center gap-6 border border-primary-300 px-10 py-4 text-lg font-medium">
-      <img
+      <Image
         src="https://authjs.dev/img/providers/google.svg"
         alt="Google logo"
         height={24}

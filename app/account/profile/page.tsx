@@ -1,7 +1,7 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
+import { Metadata } from "next";
+import Image from "next/image";
 
-import SelectCountry from '@/app/_components/SelectCountry';
+import SelectCountry from "@/app/_components/SelectCountry";
 
 export const metadata: Metadata = {
   title: "Update profile",
@@ -43,11 +43,11 @@ export default function Page() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label htmlFor="nationality">Where are you from?</label>
-            {/* <Image
+            <Image
               src={countryFlag}
               alt="Country flag"
               className="h-5 rounded-sm"
-            /> */}
+            />
           </div>
 
           <SelectCountry

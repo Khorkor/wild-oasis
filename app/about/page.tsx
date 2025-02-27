@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+
 import about1 from "@/public/about-1.jpg";
 import about2 from "@/public/about-2.jpg";
 
@@ -76,12 +78,12 @@ const About = () => {
           </p>
 
           <div>
-            <a
+            <Link
               href="/cabins"
               className="mt-4 inline-block bg-accent-500 px-8 py-5 text-lg font-semibold text-primary-800 transition-all hover:bg-accent-600"
             >
               Explore our luxury cabins
-            </a>
+            </Link>
           </div>
         </div>
       </div>

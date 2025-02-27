@@ -1,4 +1,4 @@
-export interface Cabin {
+export interface ICabin {
   id: number;
   created_at?: string; // timestamp with time zone
   name: string;

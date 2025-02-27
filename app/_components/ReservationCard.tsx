@@ -1,11 +1,11 @@
-import { format, formatDistance, isPast, isToday, parseISO } from 'date-fns';
-import Image from 'next/image';
-import { FC } from 'react';
+import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
+import Image from "next/image";
+import { FC } from "react";
 
-import { Booking } from '@/app/_types';
-import { PencilSquareIcon } from '@heroicons/react/24/solid';
+import { IBooking } from "@/app/_types";
+import { PencilSquareIcon } from "@heroicons/react/24/solid";
 
-import DeleteReservation from './DeleteReservation';
+import DeleteReservation from "./DeleteReservation";
 
 export const formatDistanceFromNow = (dateStr: string): string =>
   formatDistance(parseISO(dateStr), new Date(), {
@@ -13,7 +13,7 @@ export const formatDistanceFromNow = (dateStr: string): string =>
   }).replace("about ", "");
 
 interface ReservationCardProps {
-  booking: Booking;
+  booking: IBooking;
 }
 
 const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
@@ -25,8 +25,10 @@ const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
     totalPrice,
     numGuests,
     created_at,
-    cabins: { name, image },
+    cabin,
   } = booking;
+
+  const { name, image } = cabin || {};
 
   return (
     <div className="flex border border-primary-800">

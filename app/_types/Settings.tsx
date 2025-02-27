@@ -1,4 +1,4 @@
-export interface Settings {
+export interface ISettings {
   id: number;
   created_at: string;
   minBookingLength: number;

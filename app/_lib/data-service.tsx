@@ -1,14 +1,14 @@
 import { eachDayOfInterval } from "date-fns";
 import { notFound } from "next/navigation";
 
-import { Booking, Cabin, Country, Guest, Settings } from "@/app/_types";
+import { IBooking, ICabin, ICountry, IGuest, ISettings } from "@/app/_types";
 
 import { supabase } from "./supabase";
 
 /////////////
 // GET
 
-export const getCabin = async (id: number): Promise<Cabin | null> => {
+export const getCabin = async (id: number): Promise<ICabin | null> => {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -38,7 +38,7 @@ export const getCabinPrice = async (
   return data;
 };
 
-export const getCabins = async (): Promise<Cabin[]> => {
+export const getCabins = async (): Promise<ICabin[]> => {
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
@@ -51,7 +51,7 @@ export const getCabins = async (): Promise<Cabin[]> => {
   return data;
 };
 
-export const getGuest = async (email: string): Promise<Guest | null> => {
+export const getGuest = async (email: string): Promise<IGuest | null> => {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -65,7 +65,7 @@ export const getGuest = async (email: string): Promise<Guest | null> => {
   return data;
 };
 
-export const getBooking = async (id: number): Promise<Booking | null> => {
+export const getBooking = async (id: number): Promise<IBooking | null> => {
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
@@ -80,7 +80,7 @@ export const getBooking = async (id: number): Promise<Booking | null> => {
   return data;
 };
 
-export const getBookings = async (guestId: number): Promise<Booking[]> => {
+export const getBookings = async (guestId: number): Promise<IBooking[]> => {
   const { data, error } = await supabase
     .from("bookings")
     .select(
@@ -149,7 +149,7 @@ export const getBookedDatesByCabinId = async (
 
   // Map bookings to an array of booked dates
   const bookedDates = data
-    .map((booking: Booking) => {
+    .map((booking: IBooking) => {
       return eachDayOfInterval({
         start: new Date(booking.startDate), // Convert startDate to Date
         end: new Date(booking.endDate), // Convert endDate to Date
@@ -160,7 +160,7 @@ export const getBookedDatesByCabinId = async (
   return bookedDates;
 };
 
-export const getSettings = async (): Promise<Settings> => {
+export const getSettings = async (): Promise<ISettings> => {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {
@@ -171,7 +171,7 @@ export const getSettings = async (): Promise<Settings> => {
   return data;
 };
 
-export const getCountries = async (): Promise<Country[]> => {
+export const getCountries = async (): Promise<ICountry[]> => {
   try {
     const res = await fetch(
       "https://restcountries.com/v2/all?fields=name,flag",
@@ -187,7 +187,7 @@ export const getCountries = async (): Promise<Country[]> => {
 /////////////
 // CREATE
 
-export const createGuest = async (newGuest: Guest): Promise<Guest[]> => {
+export const createGuest = async (newGuest: IGuest): Promise<IGuest[]> => {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
@@ -199,10 +199,12 @@ export const createGuest = async (newGuest: Guest): Promise<Guest[]> => {
     throw new Error("Expected an array of guests");
   }
 
-  return data as Guest[];
+  return data as IGuest[];
 };
 
-export const createBooking = async (newBooking: Booking): Promise<Booking> => {
+export const createBooking = async (
+  newBooking: IBooking,
+): Promise<IBooking> => {
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
@@ -222,8 +224,8 @@ export const createBooking = async (newBooking: Booking): Promise<Booking> => {
 
 export const updateGuest = async (
   id: number,
-  updatedFields: Partial<Guest>,
-): Promise<Guest> => {
+  updatedFields: Partial<IGuest>,
+): Promise<IGuest> => {
   const { data, error } = await supabase
     .from("guests")
     .update(updatedFields)
@@ -240,8 +242,8 @@ export const updateGuest = async (
 
 export const updateBooking = async (
   id: number,
-  updatedFields: Partial<Booking>,
-): Promise<Booking> => {
+  updatedFields: Partial<IBooking>,
+): Promise<IBooking> => {
   const { data, error } = await supabase
     .from("bookings")
     .update(updatedFields)

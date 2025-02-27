@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
-import { UsersIcon } from '@heroicons/react/24/solid';
+import { UsersIcon } from "@heroicons/react/24/solid";
 
-import { Cabin } from '../_types/Cabin';
+import { ICabin } from "../_types/Cabin";
 
 interface CabinCardProps {
-  cabin: Cabin;
+  cabin: ICabin;
 }
 
 const CabinCard: FC<CabinCardProps> = ({ cabin }) => {

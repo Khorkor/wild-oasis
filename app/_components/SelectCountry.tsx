@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { getCountries } from '@/app/_lib/data-service';
+import { getCountries } from "@/app/_lib/data-service";
 
-import { Country } from '../_types';
+import { ICountry } from "../_types";
 
 interface SelectCountryProps {
   defaultCountry: string;
@@ -17,7 +17,7 @@ const SelectCountry: FC<SelectCountryProps> = async ({
   id,
   className,
 }) => {
-  const countries: Country[] = await getCountries();
+  const countries: ICountry[] = await getCountries();
 
   const flag =
     countries.find((country) => country.name === defaultCountry)?.flag ?? "";

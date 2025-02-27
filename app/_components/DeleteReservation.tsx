@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { TrashIcon } from '@heroicons/react/24/solid';
+import { TrashIcon } from "@heroicons/react/24/solid";
 
 interface DeleteReservationProps {
-  bookingId: string;
+  bookingId: number;
 }
 
 const DeleteReservation: FC<DeleteReservationProps> = ({ bookingId }) => {

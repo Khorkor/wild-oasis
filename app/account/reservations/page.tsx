@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
+import { Metadata } from "next";
+import Link from "next/link";
 
-import ReservationCard from '@/app/_components/ReservationCard';
-import { Booking } from '@/app/_types';
+import ReservationCard from "@/app/_components/ReservationCard";
+import { IBooking } from "@/app/_types";
 
 export const metadata: Metadata = {
   title: "Reservations",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   // CHANGE
-  const bookings: Booking[] = [];
+  const bookings: IBooking[] = [];
 
   return (
     <div>
@@ -20,9 +21,9 @@ export default function Page() {
       {bookings.length === 0 ? (
         <p className="text-lg">
           You have no reservations yet. Check out our{" "}
-          <a className="text-accent-500 underline" href="/cabins">
+          <Link className="text-accent-500 underline" href="/cabins">
             luxury cabins &rarr;
-          </a>
+          </Link>
         </p>
       ) : (
         <ul className="space-y-6">

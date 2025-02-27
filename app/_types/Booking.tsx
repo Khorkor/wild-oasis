@@ -1,6 +1,6 @@
-import { Cabin } from './Cabin';
+import { ICabin } from "./Cabin";
 
-export interface Booking {
+export interface IBooking {
   id: number;
   created_at: string;
   startDate: string;
@@ -16,5 +16,5 @@ export interface Booking {
   observations?: string;
   cabinId: number;
   guestId: number;
-  cabin?: Cabin;
+  cabin?: ICabin;
 }

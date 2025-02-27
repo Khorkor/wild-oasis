@@ -1,4 +1,4 @@
-export interface Guest {
+export interface IGuest {
   id: number;
   created_at: string;
   fullName: string;
