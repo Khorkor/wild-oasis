@@ -177,6 +177,7 @@ export const getCountries = async (): Promise<ICountry[]> => {
       "https://restcountries.com/v2/all?fields=name,flag",
     );
     const countries = await res.json();
+
     return countries;
   } catch (error) {
     console.error(error);

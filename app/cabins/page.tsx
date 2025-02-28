@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: "Cabins",
 };
 
+export const revalidate = 3600;
+
 const Cabins = () => {
   return (
     <div>

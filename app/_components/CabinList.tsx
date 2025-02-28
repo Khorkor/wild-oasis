@@ -4,6 +4,8 @@ import { getCabins } from "@/app/_lib/data-service";
 import { ICabin } from "../_types/Cabin";
 
 async function CabinList() {
+  // unstable_noStore();
+
   const cabins: ICabin[] = await getCabins();
 
   if (!cabins.length) return null;
