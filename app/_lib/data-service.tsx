@@ -97,36 +97,6 @@ export const getBookings = async (guestId: number): Promise<IBooking[]> => {
   return data;
 };
 
-// export async function getBookedDatesByCabinId(
-//   cabinId: number,
-// ): Promise<Date[]> {
-//   let today = new Date();
-//   today.setUTCHours(0, 0, 0, 0);
-//   today = today.toISOString();
-
-//   const { data, error } = await supabase
-//     .from("bookings")
-//     .select("*")
-//     .eq("cabinId", cabinId)
-//     .or(`startDate.gte.${today},status.eq.checked-in`);
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Bookings could not be loaded");
-//   }
-
-//   const bookedDates = data
-//     .map((booking: Booking) => {
-//       return eachDayOfInterval({
-//         start: new Date(booking.startDate),
-//         end: new Date(booking.endDate),
-//       });
-//     })
-//     .flat();
-
-//   return bookedDates;
-// }
-
 export const getBookedDatesByCabinId = async (
   cabinId: number,
 ): Promise<Date[]> => {

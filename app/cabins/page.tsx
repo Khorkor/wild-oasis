@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
-
-import { Suspense } from "react";
+import { FC, Suspense } from "react";
 
 import CabinList from "@/app/_components/CabinList";
+import Filter from "@/app/_components/Filter";
 import Spinner from "@/app/_components/Spinner";
 
 export const metadata: Metadata = {
   title: "Cabins",
 };
 
-export const revalidate = 3600;
+// not needed with searchParams
+// export const revalidate = 3600;
 
-const Cabins = () => {
+interface CabinsProps {
+  searchParams: Promise<Record<string, string>>;
+}
+
+const Cabins: FC<CabinsProps> = async ({ searchParams }) => {
+  const { capacity } = await searchParams;
+
   return (
     <div>
       <h1 className="mb-5 text-4xl font-medium text-accent-400">
@@ -25,8 +32,13 @@ const Cabins = () => {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+
+      <div className="mb-8 flex justify-end">
+        <Filter />
+      </div>
+
       <Suspense fallback={<Spinner />}>
-        <CabinList />
+        <CabinList filter={capacity} />
       </Suspense>
     </div>
   );

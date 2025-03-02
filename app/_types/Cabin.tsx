@@ -8,3 +8,5 @@ export interface ICabin {
   description?: string;
   image?: string; // optional image field
 }
+
+export type ICabinFilterOption = "all" | "small" | "medium" | "large";
