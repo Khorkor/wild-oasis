@@ -12,11 +12,11 @@ export const formatDistanceFromNow = (dateStr: string): string =>
     addSuffix: true,
   }).replace("about ", "");
 
-interface ReservationCardProps {
+interface IReservationCardProps {
   booking: IBooking;
 }
 
-const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
+const ReservationCard: FC<IReservationCardProps> = ({ booking }) => {
   const {
     id,
     startDate,
@@ -45,7 +45,7 @@ const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
-          {isPast(new Date(startDate)) ? (
+          {isPast(new Date(startDate!)) ? (
             <span className="flex h-7 items-center rounded-sm bg-yellow-800 px-3 text-xs font-bold uppercase text-yellow-200">
               past
             </span>
@@ -57,21 +57,21 @@ const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
         </div>
 
         <p className="text-lg text-primary-300">
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-          {isToday(new Date(startDate))
+          {format(new Date(startDate!), "EEE, MMM dd yyyy")} (
+          {isToday(new Date(startDate!))
             ? "Today"
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
+            : formatDistanceFromNow(startDate!)}
+          ) &mdash; {format(new Date(endDate!), "EEE, MMM dd yyyy")}
         </p>
 
         <div className="mt-auto flex items-baseline gap-5">
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
           <p className="text-primary-300">&bull;</p>
           <p className="text-lg text-primary-300">
-            {numGuests} guest{numGuests > 1 && "s"}
+            {numGuests} guest{numGuests! > 1 && "s"}
           </p>
           <p className="ml-auto text-sm text-primary-400">
-            Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
+            Booked {format(new Date(created_at!), "EEE, MMM dd yyyy, p")}
           </p>
         </div>
       </div>
@@ -84,7 +84,7 @@ const ReservationCard: FC<ReservationCardProps> = ({ booking }) => {
           <PencilSquareIcon className="h-5 w-5 text-primary-600 transition-colors group-hover:text-primary-800" />
           <span className="mt-1">Edit</span>
         </a>
-        <DeleteReservation bookingId={id} />
+        <DeleteReservation bookingId={id!} />
       </div>
     </div>
   );

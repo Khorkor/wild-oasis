@@ -121,8 +121,8 @@ export const getBookedDatesByCabinId = async (
   const bookedDates = data
     .map((booking: IBooking) => {
       return eachDayOfInterval({
-        start: new Date(booking.startDate), // Convert startDate to Date
-        end: new Date(booking.endDate), // Convert endDate to Date
+        start: new Date(booking.startDate!),
+        end: new Date(booking.endDate!),
       });
     })
     .flat();
@@ -176,6 +176,7 @@ export const createGuest = async (newGuest: IGuest): Promise<IGuest[]> => {
 export const createBooking = async (
   newBooking: IBooking,
 ): Promise<IBooking> => {
+  console.log("Creating booking with data:", newBooking);
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])

@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  // CHANGE
   const bookings: IBooking[] = [];
 
   return (

@@ -3,6 +3,7 @@ import { FC, Suspense } from "react";
 
 import CabinList from "@/app/_components/CabinList";
 import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 import Spinner from "@/app/_components/Spinner";
 
 export const metadata: Metadata = {
@@ -37,8 +38,9 @@ const Cabins: FC<CabinsProps> = async ({ searchParams }) => {
         <Filter />
       </div>
 
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner />} key={capacity}>
         <CabinList filter={capacity} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

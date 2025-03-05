@@ -1,10 +1,12 @@
 import type { FC, ReactNode } from "react";
 import type { Metadata } from "next";
-import '@/_styles/globals.css';
+import "@/_styles/globals.css";
 
-import { Josefin_Sans } from 'next/font/google';
+import { Josefin_Sans } from "next/font/google";
 
-import Header from './_components/Header';
+import { ReservationProvider } from "@/app/_context/ReservationContext";
+
+import Header from "./_components/Header";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -32,7 +34,9 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       >
         <Header />
         <div className="grid flex-1 px-8 py-12">
-          <main className="mx-auto w-full max-w-7xl">{children}</main>
+          <main className="mx-auto w-full max-w-7xl">
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
         </div>
       </body>
     </html>
