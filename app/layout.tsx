@@ -33,7 +33,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
         className={`${josefin.className} relative flex min-h-screen flex-col bg-primary-950 text-primary-100 antialiased`}
       >
         <Header />
-        <div className="grid flex-1 px-8 py-12">
+        <div className="grid flex-1 px-2 py-12 sm:px-8">
           <main className="mx-auto w-full max-w-7xl">
             <ReservationProvider>{children}</ReservationProvider>
           </main>

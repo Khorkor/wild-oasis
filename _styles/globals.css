@@ -8,8 +8,8 @@
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid theme("colors.primary.900");
-    border-right-color: theme("colors.primary.200");
+    border: 8px solid #1f2a44; /* primary-900 */
+    border-right-color: #a9b2b5; /* primary-200 */
     animation: rotate 1s infinite linear;
   }
 
@@ -18,7 +18,7 @@
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid theme("colors.primary.200");
+    border: 2px solid #a9b2b5; /* primary-200 */
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }
@@ -32,124 +32,43 @@
 
 /* Date Picker Custom Styles */
 .rdp {
-  --rdp-cell-size: 16px !important; /* Smaller cells on small screens */
+  --rdp-cell-size: 16px !important;
   --rdp-accent-color: theme("colors.accent.500") !important;
   --rdp-background-color: theme("colors.accent.600") !important;
   margin: 0 !important;
   padding-top: 0 !important;
 }
 
-@media (min-width: 640px) {
-  .rdp {
-    --rdp-cell-size: 18px !important; /* Slightly larger cells on medium screens */
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp {
-    --rdp-cell-size: 20px !important; /* Even larger cells on large screens */
-  }
-}
-
 .rdp-months {
   display: flex !important;
   flex-wrap: nowrap !important;
-  width: 100% !important;
-  gap: 4px !important; /* Smaller gap on small screens */
-}
-
-@media (min-width: 640px) {
-  .rdp-months {
-    gap: 6px !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-months {
-    gap: 8px !important;
-  }
+  width: 100 !important;
+  gap: 2px !important;
 }
 
 .rdp-month {
   width: 48% !important;
 }
 
-/* Style the dropdown arrows */
-.rdp-caption_dropdowns {
-  display: flex;
-  gap: 1px;
+.rdp-dropdown {
+  background-color: #1f2a44;
+  color: theme("colors.accent.500");
 }
 
-@media (min-width: 640px) {
-  .rdp-caption_dropdowns {
-    gap: 2px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-caption_dropdowns {
-    gap: 3px;
-  }
-}
-
-/* Style the captions (month/year) */
 .rdp-caption {
-  font-size: 0.55rem;
   color: #ffffff;
 }
 
-@media (min-width: 640px) {
-  .rdp-caption {
-    font-size: 0.65rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-caption {
-    font-size: 0.75rem;
-  }
-}
-
-/* Style the day headers (Su, Mo, etc.) */
 .rdp-head_cell {
-  font-size: 0.4rem;
   color: #ffffff;
   text-align: center;
   padding-bottom: 1px;
 }
 
-@media (min-width: 640px) {
-  .rdp-head_cell {
-    font-size: 0.5rem;
-    padding-bottom: 1px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-head_cell {
-    font-size: 0.55rem;
-    padding-bottom: 2px;
-  }
-}
-
-/* Style the days */
 .rdp-day {
-  font-size: 0.5rem;
+  font-size: 1rem; /* Preserved as per your update */
 }
 
-@media (min-width: 640px) {
-  .rdp-day {
-    font-size: 0.55rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-day {
-    font-size: 0.65rem;
-  }
-}
-
-/* Custom range styling */
 .rdp-day_selected {
   border: none !important;
 }
@@ -158,20 +77,6 @@
   background-color: theme("colors.accent.500") !important;
   border-top-left-radius: 0.4rem !important;
   border-bottom-left-radius: 0.4rem !important;
-}
-
-@media (min-width: 640px) {
-  .rdp-day_range_start {
-    border-top-left-radius: 0.5rem !important;
-    border-bottom-left-radius: 0.5rem !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .rdp-day_range_start {
-    border-top-left-radius: 0.75rem !important;
-    border-bottom-left-radius: 0.75rem !important;
-  }
 }
 
 .rdp-day_range_middle {
@@ -184,17 +89,66 @@
   border-bottom-right-radius: 0.4rem !important;
 }
 
+/* Style the dropdown arrows and year selector */
+.rdp .rdp-caption_dropdowns {
+  display: flex !important;
+  gap: 1px !important;
+  background-color: var(--rdp-dropdown-bg) !important;
+}
+
+.rdp .rdp-caption_dropdowns select {
+  background-color: var(--rdp-dropdown-bg) !important;
+  color: var(--rdp-dropdown-text) !important;
+  border: none !important;
+  padding: 2px !important;
+  appearance: none !important; /* Remove default dropdown arrow styling */
+}
+
+/* Media queries for 640px and above */
 @media (min-width: 640px) {
+  .rdp {
+    --rdp-cell-size: 18px !important;
+  }
+  .rdp-months {
+    gap: 4px !important;
+  }
+  .rdp-day_range_start {
+    border-top-left-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+  }
   .rdp-day_range_end {
     border-top-right-radius: 0.5rem !important;
     border-bottom-right-radius: 0.5rem !important;
   }
+  .rdp .rdp-caption_dropdowns {
+    gap: 2px !important;
+  }
+  .rdp .rdp-caption_dropdowns select {
+    padding: 4px !important;
+  }
 }
 
+/* Media queries for 1024px and above */
 @media (min-width: 1024px) {
+  .rdp {
+    --rdp-cell-size: 20px !important;
+  }
+  .rdp-months {
+    gap: 6px !important;
+  }
+  .rdp-day_range_start {
+    border-top-left-radius: 0.75rem !important;
+    border-bottom-left-radius: 0.75rem !important;
+  }
   .rdp-day_range_end {
     border-top-right-radius: 0.75rem !important;
     border-bottom-right-radius: 0.75rem !important;
+  }
+  .rdp .rdp-caption_dropdowns {
+    gap: 3px !important;
+  }
+  .rdp .rdp-caption_dropdowns select {
+    padding: 6px !important;
   }
 }
 
@@ -202,4 +156,21 @@
 textarea,
 select {
   transition: all 0.2s;
+}
+
+/* Additional layout adjustments to fit within bordered area */
+.reservation-container {
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .reservation-container {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.reservation-column {
+  padding: 8px;
 }

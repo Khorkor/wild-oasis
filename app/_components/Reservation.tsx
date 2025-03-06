@@ -21,7 +21,7 @@ async function Reservation({ cabin }: IReservationProps) {
   // const session: ISession | null = await auth();
 
   return (
-    <div className="grid grid-cols-1 border border-primary-800 md:grid-cols-2">
+    <div className="grid grid-cols-1 items-stretch border border-primary-800 md:grid-cols-[2fr_1fr]">
       <DateSelector
         settings={settings}
         bookedDates={bookedDates}
