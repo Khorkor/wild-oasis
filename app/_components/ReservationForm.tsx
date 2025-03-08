@@ -1,6 +1,8 @@
 "use client";
 
 import { differenceInDays } from "date-fns";
+import { Session } from "next-auth";
+import Image from "next/image";
 
 import { useReservation } from "@/app/_context/ReservationContext";
 import { createBooking } from "@/app/_lib/data-service";
@@ -10,9 +12,10 @@ import SubmitButton from "./SubmitButton";
 
 interface IReservationFormProps {
   cabin: ICabin;
+  user: Session | null;
 }
 
-function ReservationForm({ cabin }: IReservationFormProps) {
+function ReservationForm({ cabin, user }: IReservationFormProps) {
   const { range, resetRange } = useReservation();
   const { maxCapacity, regularPrice, discount, id } = cabin;
 
@@ -57,16 +60,20 @@ function ReservationForm({ cabin }: IReservationFormProps) {
     <div className="flex h-full flex-col">
       <div className="flex items-center justify-between bg-primary-800 px-2 py-1 text-xs text-primary-300 sm:px-4 sm:py-2 sm:text-sm md:text-base">
         <p>Logged in as</p>
-        {/* 
-        <div className="flex items-center gap-4">
-          <img
-            referrerPolicy="no-referrer"
-            className="h-8 rounded-full"
-            src={user.countryFlag}
-            alt={user.fullName}
-          />
-          <p>{user.fullName}</p>
-        </div> */}
+
+        {user && (
+          <div className="flex items-center gap-4">
+            <Image
+              className="rounded-full"
+              src={user.user?.image || "/default.png"}
+              height={32}
+              width={32}
+              referrerPolicy="no-referrer"
+              alt={user.user?.name || "Guest"}
+            />
+            <p>{user.user?.name}</p>
+          </div>
+        )}
       </div>
 
       <form

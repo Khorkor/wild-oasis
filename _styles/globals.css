@@ -42,8 +42,8 @@
 .rdp-months {
   display: flex !important;
   flex-wrap: nowrap !important;
+  justify-content: space-between;
   width: 100 !important;
-  gap: 2px !important;
 }
 
 .rdp-month {
@@ -53,10 +53,15 @@
 .rdp-dropdown {
   background-color: #1f2a44;
   color: theme("colors.accent.500");
+  display: flex;
 }
 
 .rdp-caption {
   color: #ffffff;
+}
+
+.rdp-month_grid {
+  width: max-content;
 }
 
 .rdp-head_cell {
@@ -110,7 +115,7 @@
     --rdp-cell-size: 18px !important;
   }
   .rdp-months {
-    gap: 4px !important;
+    gap: 10px !important;
   }
   .rdp-day_range_start {
     border-top-left-radius: 0.5rem !important;
@@ -134,7 +139,7 @@
     --rdp-cell-size: 20px !important;
   }
   .rdp-months {
-    gap: 6px !important;
+    gap: 20px !important;
   }
   .rdp-day_range_start {
     border-top-left-radius: 0.75rem !important;

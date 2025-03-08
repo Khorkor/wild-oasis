@@ -57,16 +57,13 @@ function DateSelector({ settings, cabin, bookedDates }: IDateSelectorProps) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640); // Tailwind's sm breakpoint
+      setIsMobile(window.innerWidth < 640);
     };
 
-    // Set initial value
     handleResize();
 
-    // Add event listener for resize
     window.addEventListener("resize", handleResize);
 
-    // Cleanup listener on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -79,21 +76,19 @@ function DateSelector({ settings, cabin, bookedDates }: IDateSelectorProps) {
           <DayPicker
             className="rdp mycalendar place-self-center"
             classNames={{
-              selected: "rdp-day_selected",
               range_start: "rdp-day_range_start",
               range_middle: "rdp-day_range_middle",
               range_end: "rdp-day_range_end",
-              caption_dropdowns: "bg-primary-900 text-primary-800", // Custom styles for year selector
             }}
             mode="range"
-            onSelect={(newRange) => setRange(newRange!)}
-            selected={displayRange}
+            onSelect={(range) => setRange(range!)}
+            selected={range}
             min={minBookingLength + 1}
             max={maxBookingLength}
             startMonth={new Date()}
             endMonth={new Date(currentYear + 5, 11)}
             captionLayout="dropdown"
-            numberOfMonths={isMobile ? 1 : 2} // 1 month on mobile, 2 on larger screens
+            numberOfMonths={isMobile ? 1 : 2}
             disabled={(curDate) =>
               isPast(curDate) ||
               bookedDates.some((date) => isSameDay(date, curDate))
