@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { FC } from "react";
 
 import LoginMessage from "@/app/_components/LoginMessage";
 import { auth } from "@/app/_lib/auth";
@@ -12,7 +13,7 @@ interface IReservationProps {
   cabin: ICabin;
 }
 
-async function Reservation({ cabin }: IReservationProps) {
+const Reservation: FC<IReservationProps> = async ({ cabin }) => {
   const [settings, bookedDates]: [ISettings, Date[]] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
@@ -28,12 +29,12 @@ async function Reservation({ cabin }: IReservationProps) {
       />
 
       {session?.user ? (
-        <ReservationForm cabin={cabin} user={session.user} />
+        <ReservationForm cabin={cabin} session={session} />
       ) : (
         <LoginMessage />
       )}
     </div>
   );
-}
+};
 
 export default Reservation;

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<RootLayoutProps> = async ({ children }) => {
   const session: Session | null = await auth();
-  console.log(session);
+
   return (
     <html lang="en">
       <body
