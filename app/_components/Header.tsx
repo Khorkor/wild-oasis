@@ -1,10 +1,11 @@
 "use client";
-import { Session } from "next-auth";
+
 import { useEffect, useState } from "react";
 
 import Logo from "@/app/_components/Logo";
 import MobileNav from "@/app/_components/MobileNav";
 import Navigation from "@/app/_components/Navigation";
+import { Session } from "@/app/_lib/auth";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 
 interface HeaderProps {

@@ -1,11 +1,11 @@
 "use client";
 
 import { differenceInDays } from "date-fns";
-import { Session } from "next-auth";
 import Image from "next/image";
 import { FC } from "react";
 
 import { useReservation } from "@/app/_context/ReservationContext";
+import { Session } from "@/app/_lib/auth";
 import { createBooking } from "@/app/_lib/data-service";
 import { IBooking, ICabin } from "@/app/_types";
 

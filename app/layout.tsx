@@ -2,11 +2,10 @@ import type { FC, ReactNode } from "react";
 import type { Metadata } from "next";
 import "@/_styles/globals.css";
 
-import { Session } from "next-auth";
 import { Josefin_Sans } from "next/font/google";
 
 import { ReservationProvider } from "@/app/_context/ReservationContext";
-import { auth } from "@/app/_lib/auth";
+import { auth, Session } from "@/app/_lib/auth";
 
 import Header from "./_components/Header";
 

@@ -1,8 +1,8 @@
 "use client";
-import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Session } from "@/app/_lib/auth";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const MobileNav = ({

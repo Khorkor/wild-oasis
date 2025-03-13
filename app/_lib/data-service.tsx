@@ -56,10 +56,11 @@ export const getGuest = async (email: string): Promise<IGuest | null> => {
     .from("guests")
     .select("*")
     .eq("email", email)
-    .single();
+    .maybeSingle();
 
   if (error) {
-    console.error(error);
+    console.error("Database error:", error); // Better error logging
+    return null; // Explicit null return on error
   }
 
   return data;
@@ -158,19 +159,36 @@ export const getCountries = async (): Promise<ICountry[]> => {
 /////////////
 // CREATE
 
-export const createGuest = async (newGuest: IGuest): Promise<IGuest[]> => {
-  const { data, error } = await supabase.from("guests").insert([newGuest]);
+// export const createGuest = async (newGuest: IGuest): Promise<IGuest[]> => {
+//   const { data, error } = await supabase.from("guests").insert([newGuest]);
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error("Guest could not be created");
+//   }
+
+//   if (!Array.isArray(data)) {
+//     throw new Error("Expected an array of guests");
+//   }
+
+//   return data as IGuest[];
+// };
+
+export const createGuest = async (
+  newGuest: Omit<IGuest, "id" | "created_at">,
+): Promise<IGuest> => {
+  const { data, error } = await supabase
+    .from("guests")
+    .insert([newGuest])
+    .select()
+    .single();
 
   if (error) {
-    console.error(error);
-    throw new Error("Guest could not be created");
+    console.error("Database error:", error); // More descriptive error
+    throw new Error("Guest could not be created: " + error.message); // Include original error
   }
 
-  if (!Array.isArray(data)) {
-    throw new Error("Expected an array of guests");
-  }
-
-  return data as IGuest[];
+  return data as IGuest;
 };
 
 export const createBooking = async (

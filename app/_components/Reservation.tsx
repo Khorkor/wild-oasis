@@ -1,8 +1,7 @@
-import { Session } from "next-auth";
 import { FC } from "react";
 
 import LoginMessage from "@/app/_components/LoginMessage";
-import { auth } from "@/app/_lib/auth";
+import { auth, Session } from "@/app/_lib/auth";
 import { ICabin, ISettings } from "@/app/_types";
 
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
