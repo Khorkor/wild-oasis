@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 import SelectCountry from "@/app/_components/SelectCountry";
 import UpdateProfileForm from "@/app/_components/UpdateProfileForm";
@@ -12,7 +11,10 @@ export const metadata: Metadata = {
 
 const ProfilePage = async () => {
   const session = await auth();
-  const guest = await getGuest(session.user.email);
+
+  const guest = session?.user?.email
+    ? await getGuest(session.user.email)
+    : null;
 
   return (
     <div>
@@ -25,13 +27,15 @@ const ProfilePage = async () => {
         faster and smoother. See you soon!
       </p>
 
-      <UpdateProfileForm guest={guest}>
-        <SelectCountry
-          name="nationality"
-          id="nationality"
-          className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
-          defaultCountry={guest.nationality}
-        />
+      <UpdateProfileForm guest={guest!}>
+        {guest && (
+          <SelectCountry
+            name="nationality"
+            id="nationality"
+            className="w-full rounded-sm bg-primary-200 px-5 py-3 text-primary-800 shadow-sm"
+            defaultCountry={guest.nationality!}
+          />
+        )}
       </UpdateProfileForm>
     </div>
   );
