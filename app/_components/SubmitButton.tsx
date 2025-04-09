@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 interface SubmitButtonProps {
   children: React.ReactNode;
   pendingLabel: string;
-  isSubmitting: boolean;
+  isSubmitting?: boolean;
 }
 
 export default function SubmitButton({

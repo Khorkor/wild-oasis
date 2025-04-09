@@ -32,27 +32,56 @@ function SideNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="border-r border-primary-900">
-      <ul className="flex h-full flex-col gap-2 text-lg">
-        {navLinks.map((link) => (
-          <li key={link.name}>
-            <Link
-              className={`flex items-center gap-4 px-5 py-3 font-semibold text-primary-200 transition-colors hover:bg-primary-900 hover:text-primary-100 ${
+    <>
+      {/* Desktop Sidebar */}
+      <nav className="hidden border-r border-primary-900 md:block">
+        <ul className="flex h-full flex-col gap-2 text-lg">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                className={`flex items-center gap-4 px-5 py-3 font-semibold text-primary-200 transition-colors hover:bg-primary-900 hover:text-primary-100 ${
+                  pathname === link.href ? "bg-primary-900" : ""
+                }`}
+                href={link.href}
+              >
+                {link.icon}
+                <span>{link.name}</span>
+              </Link>
+            </li>
+          ))}
+          <li className="mt-auto">
+            <SignOutButton />
+          </li>
+        </ul>
+      </nav>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 block border-t border-primary-900 bg-primary-800 md:hidden">
+        <ul className="flex text-lg">
+          {navLinks.map((link) => (
+            <li
+              key={link.name}
+              className={`transition-colors ${
                 pathname === link.href ? "bg-primary-900" : ""
               }`}
-              href={link.href}
             >
-              {link.icon}
-              <span>{link.name}</span>
-            </Link>
+              <Link
+                className={
+                  "flex flex-col items-center justify-center px-4 py-2 font-semibold text-primary-200"
+                }
+                href={link.href}
+              >
+                {link.icon}
+                <span className="text-xs">{link.name}</span>
+              </Link>
+            </li>
+          ))}
+          <li>
+            <SignOutButton />
           </li>
-        ))}
-
-        <li className="mt-auto">
-          <SignOutButton />
-        </li>
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+    </>
   );
 }
 

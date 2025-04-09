@@ -1,15 +1,25 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import ReservationCard from "@/app/_components/ReservationCard";
+import { requireAuth } from "@/app/_lib/auth-helpers";
+import { getBookings } from "@/app/_lib/data-service";
 import { IBooking } from "@/app/_types";
 
 export const metadata: Metadata = {
   title: "Reservations",
 };
 
-export default function Page() {
-  const bookings: IBooking[] = [];
+const Page = async () => {
+  const session = await requireAuth();
+  const guestId = session.user.guestId;
+
+  if (!guestId) {
+    redirect("/error");
+  }
+
+  const bookings: IBooking[] = await getBookings(guestId);
 
   return (
     <div>
@@ -21,7 +31,7 @@ export default function Page() {
         <p className="text-lg">
           You have no reservations yet. Check out our{" "}
           <Link className="text-accent-500 underline" href="/cabins">
-            luxury cabins &rarr;
+            Luxury cabins &rarr;
           </Link>
         </p>
       ) : (
@@ -33,4 +43,6 @@ export default function Page() {
       )}
     </div>
   );
-}
+};
+
+export default Page;

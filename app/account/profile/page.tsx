@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import SelectCountry from "@/app/_components/SelectCountry";
 import UpdateProfileForm from "@/app/_components/UpdateProfileForm";
-import { auth } from "@/app/_lib/auth";
+import { requireAuth } from "@/app/_lib/auth-helpers";
 import { getGuest } from "@/app/_lib/data-service";
 
 export const metadata: Metadata = {
@@ -10,11 +11,12 @@ export const metadata: Metadata = {
 };
 
 const ProfilePage = async () => {
-  const session = await auth();
+  const session = await requireAuth();
+  const guest = await getGuest(session.user.email);
 
-  const guest = session?.user?.email
-    ? await getGuest(session.user.email)
-    : null;
+  if (!guest) {
+    redirect("/error");
+  }
 
   return (
     <div>

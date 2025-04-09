@@ -16,5 +16,5 @@ export interface IBooking {
   observations?: string;
   cabinId?: number;
   guestId?: number;
-  cabin?: ICabin;
+  cabins?: ICabin;
 }
