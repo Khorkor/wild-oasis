@@ -57,26 +57,26 @@ function SideNavigation() {
 
       {/* Mobile Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 block border-t border-primary-900 bg-primary-800 md:hidden">
-        <ul className="flex text-lg">
+        <ul className="flex w-full justify-evenly text-xs md:text-lg">
           {navLinks.map((link) => (
             <li
               key={link.name}
-              className={`transition-colors ${
+              className={`flex-1 transition-colors ${
                 pathname === link.href ? "bg-primary-900" : ""
               }`}
             >
               <Link
-                className={
-                  "flex flex-col items-center justify-center px-4 py-2 font-semibold text-primary-200"
-                }
+                className="flex flex-col items-center justify-center gap-1 px-4 py-2 font-semibold text-primary-200 transition-colors md:flex-row md:gap-2 md:px-5 md:py-3 md:hover:bg-primary-900 md:hover:text-primary-100"
                 href={link.href}
               >
                 {link.icon}
-                <span className="text-xs">{link.name}</span>
+                <span className="text-center text-xs md:text-lg">
+                  {link.name}
+                </span>
               </Link>
             </li>
           ))}
-          <li>
+          <li className="flex-1">
             <SignOutButton />
           </li>
         </ul>

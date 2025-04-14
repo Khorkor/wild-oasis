@@ -47,7 +47,7 @@ function DateSelector({ settings, cabin, bookedDates }: IDateSelectorProps) {
     displayRange?.to && displayRange?.from
       ? differenceInDays(displayRange.to, displayRange.from)
       : 0;
-  const cabinPrice: number = numNights * (regularPrice - discount);
+  const cabinPrice: number = numNights * (regularPrice! - discount!);
 
   const { minBookingLength, maxBookingLength } = settings;
   const currentYear = new Date().getFullYear();
@@ -100,10 +100,10 @@ function DateSelector({ settings, cabin, bookedDates }: IDateSelectorProps) {
       <div className="mt-2 flex h-12 items-center justify-between bg-accent-500 px-2 text-primary-800 sm:mt-4 sm:h-16 sm:px-4 md:h-[72px] md:px-8">
         <div className="flex items-baseline gap-2 sm:gap-3 md:gap-6">
           <p className="flex items-baseline gap-1 sm:gap-2">
-            {discount > 0 ? (
+            {discount! > 0 ? (
               <>
                 <span className="text-lg sm:text-xl md:text-2xl">
-                  ${regularPrice - discount}
+                  ${regularPrice! - discount!}
                 </span>
                 <span className="font-semibold text-primary-700 line-through">
                   ${regularPrice}

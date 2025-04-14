@@ -85,7 +85,7 @@ export const getBookings = async (guestId: number): Promise<IBooking[]> => {
   const { data, error } = await supabase
     .from("bookings")
     .select(
-      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)",
+      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(id, name, image)", // Include cabins(id...)
     )
     .eq("guestId", guestId)
     .order("startDate");
